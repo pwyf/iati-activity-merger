@@ -1,15 +1,18 @@
 from lxml import etree
-import glob
+from datetime import datetime
+import os, glob
 
 
-fname = "test-output-files/merged-activities.xml"
-activityFiles = glob.glob('test-activity-files/*.xml')
-
-with open(fname, "wb") as f, etree.xmlfile(f) as xf:
-    with xf.element("iati-activities"):
-        xf.write("\n  ")
-        for file in activityFiles:
-            root = etree.parse(file)
-            activities = root.iterfind(".//iati-activity")
-            for activity in activities:
-                xf.write(activity)
+def merger(activityFolder, outputFile):
+    activityFiles = glob.glob(os.path.join(activityFolder, '*.xml'))
+    with open(outputFile, "wb") as f, etree.xmlfile(f) as xf:
+        attribs = {"generated-datetime": str(datetime.now().isoformat()),
+                   "version": "2.03"}
+        with xf.element("iati-activities", attribs):
+            xf.write("\n  ")
+            for file in activityFiles:
+                root = etree.parse(file)
+                activities = root.iterfind(".//iati-activity")
+                for activity in activities:
+                    xf.write(activity)
+    return True
