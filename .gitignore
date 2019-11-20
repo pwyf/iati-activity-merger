@@ -1,5 +1,7 @@
 venv
-test-output-files
-test-activity-files
+output
+input
 __pycache__
 testers
+.vscode
+.pytest_cache
