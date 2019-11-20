@@ -1,8 +1,9 @@
-import os
+import os, uuid, shutil
 from flask import Flask, request, redirect, url_for, abort
 from flask import send_from_directory, render_template
 from werkzeug.utils import secure_filename
 from ActivityMerger import merge
+
 
 ALLOWED_EXTENSIONS = {'xml'}
 
@@ -16,37 +17,40 @@ app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY='dev',
     UPLOAD_FOLDER='input',
-    OUTPUT_FOLDER='output',
-    OUTPUT_FILE='merged.xml',
+    OUTPUT_FOLDER='output'
 )
 
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
+        outputFile = str(uuid.uuid4().hex) + '.xml'
+        uploadFolder = os.path.join(app.config['UPLOAD_FOLDER'], 
+                                    str(uuid.uuid4().hex))
+        os.mkdir(uploadFolder)
+
         if 'files[]' not in request.files:
             return redirect(request.url)
         files = request.files.getlist('files[]')
         for file in files:
-            print(file)
             if file.filename == '':
                 return redirect(request.url)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'],
+                file.save(os.path.join(uploadFolder,
                                        filename))
-        output = os.path.join(app.config['OUTPUT_FOLDER'],
-                              app.config['OUTPUT_FILE'])
-        outcome = merge.merger(app.config['UPLOAD_FOLDER'], output)
+
+        outcome = merge.merger(uploadFolder, os.path.join(app.config['OUTPUT_FOLDER'], outputFile))
         if outcome:
-            return redirect(url_for('download_and_remove'))
+            shutil.rmtree(uploadFolder)
+            return redirect(url_for('download_and_remove', filename=outputFile))
     return render_template('upload.html')
 
 
-@app.route('/download')
-def download_and_remove():
+@app.route('/download/<filename>')
+def download_and_remove(filename):
     path = os.path.join(app.root_path, "..",
-                        app.config['OUTPUT_FOLDER'], app.config['OUTPUT_FILE'])
+                        app.config['OUTPUT_FOLDER'], filename)
 
     def generate():
         with open(path) as merged:
