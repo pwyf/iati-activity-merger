@@ -1,7 +1,8 @@
 # IATI Activity Merger
 
 This tool will take multiple IATI activity files and merge them into a single activity file.
-No validation is performed, nor is the reporting-org checked at present.
+
+N.B. No validation is performed, nor is the `reporting-org` checked at present.
 
 ## Deployment
 
