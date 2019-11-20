@@ -25,6 +25,7 @@ app.config.from_mapping(
 def upload_file():
     if request.method == 'POST':
         outputFile = str(uuid.uuid4().hex) + '.xml'
+        outputFullpath = os.path.join(app.config['OUTPUT_FOLDER'], outputFile)
         uploadFolder = os.path.join(app.config['UPLOAD_FOLDER'], 
                                     str(uuid.uuid4().hex))
         os.mkdir(uploadFolder)
@@ -40,10 +41,11 @@ def upload_file():
                 file.save(os.path.join(uploadFolder,
                                        filename))
 
-        outcome = merge.merger(uploadFolder, os.path.join(app.config['OUTPUT_FOLDER'], outputFile))
+        outcome = merge.merger(uploadFolder, outputFullpath)
         if outcome:
             shutil.rmtree(uploadFolder)
             return redirect(url_for('download_and_remove', filename=outputFile))
+
     return render_template('upload.html')
 
 
