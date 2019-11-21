@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Data Quality Tester</title>
+
+    {% assets "css_base" %}
+    <link href="{{ ASSET_URL }}" rel="stylesheet">
+    {% endassets %}
+    {% block extra_css %}{% endblock %}
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    {% include 'partials/_navigation.html' %}
+
+    <div class="container">
+      {% include 'partials/_notifications.html' %}
+
+      {% block body %}{% endblock %}
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted"><a href="http://www.publishwhatyoufund.org">Publish What You Fund</a>, Southbank House, Black Prince Road, London, SE1 7SJ<br>UK Company Registration Number 07676886 (England and Wales); Registered Charity Number 1158362 (England and Wales)<br>
+        Comments or bugs: <a href="mailto:tracker@publishwhatyoufund.org">tracker@publishwhatyoufund.org</a> or <a href="https://github.com/pwyf/data-quality-tester/issues">Github</a>.
+        </p>
+      </div>
+    </footer>
+
+    {% assets "js_base" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

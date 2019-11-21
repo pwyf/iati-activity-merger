@@ -1,0 +1,134 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 60px;
+}
+
+#accordion .panel-heading,
+#more-information .panel-heading {
+    cursor: pointer;
+}
+
+.panel-group .panel-title a {
+  text-decoration: none;
+}
+
+.panel-group .panel-title .glyphicon {
+  padding-right: 10px;
+}
+
+.quality-panel {
+  margin-bottom: 20px;
+}
+
+.quality-panel .glyphicon {
+  float: right;
+}
+
+.quality-panels-list {
+  padding-top: 20px;
+}
+
+
+/* Sticky footer
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 110px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+  background-color: #f5f5f5;
+}
+
+.footer .container .text-muted {
+  margin: 20px 0;
+}
+
+#results-tabs .tab-pane li {
+  list-style: none;
+  padding-bottom: 20px;
+}
+
+#pwyf-logo {
+  float: right;
+  padding-top: 20px;
+  width: 300px;
+}
+
+#test-set-controls {
+  padding-bottom: 20px;
+}
+
+.navbar-fixed-top:after{
+  content: "beta";
+  position: fixed;
+  width: 80px;
+  height: 25px;
+  background: #EE8E4A;
+  top: 5px;
+  right: -22px;
+  text-align: center;
+  font-size: 13px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #fff;
+  line-height: 27px;
+  -ms-transform:rotate(45deg);
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+  z-index: 999;
+}
+
+.panel-body {
+  position: relative;
+}
+
+.loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.loading-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  text-align: center;
+  font-size: 10vh;
+
+  -webkit-transform: translateX(-50%) translateY(-50%);
+     -moz-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+       -o-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+}
+
+li.pwyf-logo {
+    padding: 0;
+}
+li.pwyf-logo a, li.pwyf-logo a:hover {
+    background: #ffffff !important;
+    color: #ffffff;
+    height: 100%;
+    padding: 2px;
+}
+li.pwyf-logo a img, li.pwyf-logo a:hover img {
+    height: 45px;
+    padding: 3px;
+}

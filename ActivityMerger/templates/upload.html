@@ -1,21 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block body %}
+<div class="row">
+    <div class="loading hide">
+        <div class="loading-content">
+            <h1>Loading...</h1>
+            <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </div>
+    </div>
 
-    <title>IATI Activity Merge Tool</title>
-</head>
+    <div class="jumbotron">
+        <h2 class="sub-header">IATI Activity Merge Tool</h2>
+        <p class="lead">Merge multiple IATI activity files</p>
+    </div>
 
-<body>
-    <h1>Upload multiple IATI activity files</h1>
-    <form method=post enctype=multipart/form-data> <input type=file name=files[] multiple>
-        <input type=submit value=Upload>
-    </form>
-</body>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-</html>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion"
+                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>Upload
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <form method=post enctype=multipart/form-data> <div class="form-group"><label class="control-label"
+                            for="id_original_file">Upload multiple
+                            Activity Files
+                            (.xml)</label>
+                        <div class="row bootstrap3-multi-input">
+                            <div class="col-xs-12"><input class="" id="id_original_files" type=file name=files[]
+                                    multiple>
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
