@@ -27,25 +27,44 @@
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
-                    <form method=post enctype=multipart/form-data> <div class="form-group"><label class="control-label"
-                            for="id_original_file">Upload multiple
-                            Activity Files
-                            (.xml)</label>
-                        <div class="row bootstrap3-multi-input">
-                            <div class="col-xs-12"><input class="" id="id_original_files" type=file name=files[]
-                                    multiple>
+                    <form method=post enctype=multipart/form-data>
+                        <div class="form-group">
+                            <label class="control-label"
+                                for="id_original_file">Upload multiple
+                                Activity Files
+                                (.xml)
+                            </label>
+                            <div class="row bootstrap3-multi-input">
+                                <div class="col-xs-12"><input class="" id="id_original_files" 
+                                    type=file name=files[] multiple>
+                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                Generate
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
-                        Submit
-                    </button>
-                </div>
-                </form>
             </div>
         </div>
     </div>
 </div>
-</div>
+
+<div class="row" id="how-to-use">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+    
+              <h3 class="heading-in-panel">Using the IATI Activity Merge Tool</h3>
+              <p> You can upload multiple IATI Activity files using the file selection tool</a>.</p>
+    
+              <p>Upon clicking generate, your files will be uploaded, merged, and them immediately returned to you in a new document (named 'merged.xml)'</p>
+              <p>Your data is immediately following generation of the new file. And the file can only be downloaded once before it is deleted from the server.</p>
+              <p>You can validate the generate file by visiting <a href="https://iati.cove.opendataservices.coop/">IATI CoVE</a>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 {% endblock %}
