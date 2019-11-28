@@ -48,7 +48,6 @@ def upload_file():
         outputFullpath = os.path.join(app.config['OUTPUT_FOLDER'], outputFile)
         uploadFolder = os.path.join(app.config['UPLOAD_FOLDER'], 
                                     str(uuid.uuid4().hex))
-        os.mkdir(uploadFolder)
 
         if 'files[]' not in request.files:
             return redirect(request.url)
