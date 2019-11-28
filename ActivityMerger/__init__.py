@@ -17,8 +17,8 @@ def allowed_file(filename):
 app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY='dev',
-    UPLOAD_FOLDER='input',
-    OUTPUT_FOLDER='output'
+    UPLOAD_FOLDER='/var/www/input',
+    OUTPUT_FOLDER='/var/www/output'
 )
 
 assets = FlaskAssets(app)
@@ -48,6 +48,7 @@ def upload_file():
         outputFullpath = os.path.join(app.config['OUTPUT_FOLDER'], outputFile)
         uploadFolder = os.path.join(app.config['UPLOAD_FOLDER'], 
                                     str(uuid.uuid4().hex))
+        os.mkdir(uploadFolder)
 
         if 'files[]' not in request.files:
             return redirect(request.url)
