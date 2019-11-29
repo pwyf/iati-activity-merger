@@ -1,10 +1,6 @@
-import os, uuid, shutil
-from datetime import datetime
-from flask import Flask, request, redirect, url_for, abort
-from flask import send_from_directory, render_template
+import os
+from flask import Flask
 from flask_assets import Environment as FlaskAssets, Bundle
-from werkzeug.utils import secure_filename
-from ActivityMerger import merge
 
 
 app = Flask(__name__)

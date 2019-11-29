@@ -1,10 +1,9 @@
-import os, uuid, shutil, 
+import os, uuid, shutil
 from datetime import datetime
-from flask import Flask, request, redirect, url_for, abort
+from flask import Flask, request, abort
+from flask import render_template, redirect, url_for
 from werkzeug.utils import secure_filename
-from ActivityMerger import merge
-from ActivityMerger import app
-from flask import send_from_directory, render_template
+from ActivityMerger import merge, app
 
 ALLOWED_EXTENSIONS = {'xml'}
 def allowed_file(filename):
