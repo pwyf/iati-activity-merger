@@ -49,6 +49,31 @@
                 </div>
             </div>
         </div>
+
+        {% if filename %}
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion"
+                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div><label>The merged file was generated at: {{ timestamp }}</label></div>
+                    <div><label>This is composed of {{ noFiles }} activity files.</label></div>
+                    <div class="form-group">
+                        <a href="download/{{ filename }}"><button class="btn btn-primary">
+                            Download
+                        </button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </div>
 

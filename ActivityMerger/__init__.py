@@ -1,4 +1,5 @@
 import os, uuid, shutil
+from datetime import datetime
 from flask import Flask, request, redirect, url_for, abort
 from flask import send_from_directory, render_template
 from flask_assets import Environment as FlaskAssets, Bundle
@@ -17,8 +18,8 @@ def allowed_file(filename):
 app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY='dev',
-    UPLOAD_FOLDER='/var/www/input',
-    OUTPUT_FOLDER='/var/www/output'
+    UPLOAD_FOLDER='input',
+    OUTPUT_FOLDER='output'
 )
 
 assets = FlaskAssets(app)
@@ -64,10 +65,10 @@ def upload_file():
         outcome = merge.merger(uploadFolder, outputFullpath)
         if outcome:
             shutil.rmtree(uploadFolder)
-            return redirect(url_for('download_and_remove', filename=outputFile))
+            mergeTime = datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
+            return render_template('upload.html', filename=outputFile, timestamp=mergeTime, noFiles=len(files))
 
     return render_template('upload.html')
-
 
 @app.route('/download/<filename>')
 def download_and_remove(filename):
@@ -77,8 +78,6 @@ def download_and_remove(filename):
     def generate():
         with open(path) as merged:
             yield from merged
-
-        os.remove(path)
 
     r = app.response_class(generate(), mimetype='Application/xml')
     r.headers.set('Content-Disposition', 'attachment', filename='merged.xml')
