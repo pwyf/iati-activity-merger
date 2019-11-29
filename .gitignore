@@ -5,3 +5,4 @@ __pycache__
 testers
 .vscode
 .pytest_cache
+config.py

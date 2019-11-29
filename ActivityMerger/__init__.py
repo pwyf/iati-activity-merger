@@ -1,4 +1,5 @@
 import os, uuid, shutil
+from datetime import datetime
 from flask import Flask, request, redirect, url_for, abort
 from flask import send_from_directory, render_template
 from flask_assets import Environment as FlaskAssets, Bundle
@@ -7,11 +8,6 @@ from ActivityMerger import merge
 
 
 app = Flask(__name__)
-# app.config.from_mapping(
-#     SECRET_KEY='dev',
-#     UPLOAD_FOLDER='/var/www/input',
-#     OUTPUT_FOLDER='/var/www/output'
-# )
 
 app.config.from_object('config.Config')
 app.secret_key = app.config['SECRET_KEY']
