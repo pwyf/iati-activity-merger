@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div class="panel-group" id="accordionFiles" role="tablist" aria-multiselectable="true">
+    <div class="panel-group no-margin-bottom" id="accordionFiles" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordionFiles"
                 data-target="#collapseFiles" aria-expanded="true" aria-controls="collapseFiles">
@@ -48,7 +48,7 @@
             </div>
             <div id="collapseFiles" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                 <div>
-                    <ul class="list-group">
+                    <ul class="list-group no-margin-bottom">
                         {% for filename in session['files'] %}
                         <li class="list-group-item">{{ filename }}</li>
                         {% endfor %}
