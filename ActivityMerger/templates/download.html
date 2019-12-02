@@ -2,12 +2,6 @@
 
 {% block body %}
 <div class="row">
-    <div class="loading hide">
-        <div class="loading-content">
-            <h1>Loading...</h1>
-            <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
-        </div>
-    </div>
 
     <div class="jumbotron">
         <h2 class="sub-header">IATI Activity Merge Tool</h2>
@@ -16,26 +10,50 @@
 
     <div class="panel-group" id="accordionOutput" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordionOutput"
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordionOutput"
                 data-target="#collapseOutput" aria-expanded="true" aria-controls="collapseOutput">
                 <h4 class="panel-title">
                     <a class="accordion-toggle">
-                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download merged activity file
                     </a>
                 </h4>
             </div>
             <div id="collapseOutput" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                 <div class="panel-body">
                     <div><label>The merged file was generated at: {{ timestamp }}</label></div>
-                    <div><label>This is composed of {{ noFiles }} activity files.</label></div>
+                    <div><label>This is composed of {{ session['files']|length }} activity files.</label></div>
+                    <div><label>The merged file contains {{ session['totalActivities'] }} activities (XML elements).</label></div>
                     <div class="w-100">
                         <a href="download/{{ filename }}"><button class="btn btn-primary pull-left">
-                            Download
-                        </button></a>
+                                Download
+                            </button></a>
                         <a href="/"><button class="btn btn-primary pull-right">
-                            Load New File
-                        </button></a>
+                                Load New File
+                            </button></a>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordionFiles" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordionFiles"
+                data-target="#collapseFiles" aria-expanded="true" aria-controls="collapseFiles">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Merged/Uploaded Files
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFiles" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                <div>
+                    <ul class="list-group">
+                        {% for filename in session['files'] %}
+                        <li class="list-group-item">{{ filename }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="panel-footer">These files will be deleted after 7 days.</div>
                 </div>
             </div>
         </div>

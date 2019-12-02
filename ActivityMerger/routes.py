@@ -1,6 +1,6 @@
 import os, uuid, shutil
 from datetime import datetime
-from flask import Flask, request, abort
+from flask import Flask, request, abort, session
 from flask import render_template, redirect, url_for
 from werkzeug.utils import secure_filename
 from ActivityMerger import merge, app
@@ -22,28 +22,30 @@ def upload_file():
         if 'files[]' not in request.files:
             render_template('upload.html', error=False)
         files = request.files.getlist('files[]')
-        for file in files:
-            if file.filename == '':
+        session['files'] = [singlefile.filename for singlefile in files]
+        for singlefile in files:
+            if singlefile.filename == '':
                 return render_template('upload.html', error=False)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(uploadFolder,
+            if singlefile and allowed_file(singlefile.filename):
+                filename = secure_filename(singlefile.filename)
+                singlefile.save(os.path.join(uploadFolder,
                                        filename))
 
         totalActivities = merge.merger(uploadFolder, outputFullpath)
+        session['totalActivities'] = totalActivities
         if totalActivities > 0:
             shutil.rmtree(uploadFolder)
-            return redirect(url_for('download_file', filename=outputFile, noFiles=len(files)))
+            return redirect(url_for('download_file', filename=outputFile))
         else:
             return render_template('upload.html', error=True)
 
 
     return render_template('upload.html', error=False)
 
-@app.route('/<noFiles>-<filename>', methods=['GET'])
-def download_file(filename, noFiles):
+@app.route('/<filename>', methods=['GET'])
+def download_file(filename):
     mergeTime = datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
-    return render_template('download.html', filename=filename, timestamp=mergeTime, noFiles=noFiles)
+    return render_template('download.html', filename=filename, timestamp=mergeTime)
 
 @app.route('/download/<filename>')
 def download_and_remove(filename):
