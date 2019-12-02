@@ -20,22 +20,25 @@ def upload_file():
         os.mkdir(uploadFolder)
 
         if 'files[]' not in request.files:
-            return redirect(request.url)
+            render_template('upload.html', error=False)
         files = request.files.getlist('files[]')
         for file in files:
             if file.filename == '':
-                return redirect(request.url)
+                return render_template('upload.html', error=False)
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(uploadFolder,
                                        filename))
 
-        outcome = merge.merger(uploadFolder, outputFullpath)
-        if outcome:
+        totalActivities = merge.merger(uploadFolder, outputFullpath)
+        if totalActivities > 0:
             shutil.rmtree(uploadFolder)
             return redirect(url_for('download_file', filename=outputFile, noFiles=len(files)))
+        else:
+            return render_template('upload.html', error=True)
 
-    return render_template('upload.html')
+
+    return render_template('upload.html', error=False)
 
 @app.route('/<noFiles>-<filename>', methods=['GET'])
 def download_file(filename, noFiles):

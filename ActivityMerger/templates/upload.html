@@ -44,6 +44,13 @@
                                 Generate
                             </button>
                         </div>
+                        {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            No activities were detected in the uploaded files. Please verify and try again.
+                          </div>
+                        {% endif %}
                     </form>
                 </div>
             </div>

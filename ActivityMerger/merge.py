@@ -5,6 +5,7 @@ import os, glob
 
 def merger(activityFolder, outputFile):
     activityFiles = glob.glob(os.path.join(activityFolder, '*.xml'))
+    totalActivities = 0
     with open(outputFile, "wb") as f, etree.xmlfile(f) as xf:
         attribs = {"generated-datetime": str(datetime.now().isoformat()),
                    "version": "2.03"}
@@ -13,6 +14,7 @@ def merger(activityFolder, outputFile):
             for file in activityFiles:
                 root = etree.parse(file)
                 activities = root.iterfind(".//iati-activity")
+                totalActivities += len(list(activities))
                 for activity in activities:
                     xf.write(activity)
-    return True
+    return totalActivities
