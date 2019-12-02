@@ -33,10 +33,14 @@ def upload_file():
         outcome = merge.merger(uploadFolder, outputFullpath)
         if outcome:
             shutil.rmtree(uploadFolder)
-            mergeTime = datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
-            return render_template('upload.html', filename=outputFile, timestamp=mergeTime, noFiles=len(files))
+            return redirect(url_for('download_file', filename=outputFile, noFiles=len(files)))
 
     return render_template('upload.html')
+
+@app.route('/<noFiles>-<filename>', methods=['GET'])
+def download_file(filename, noFiles):
+    mergeTime = datetime.now().strftime("%Y-%m-%d at %H:%M:%S")
+    return render_template('download.html', filename=filename, timestamp=mergeTime, noFiles=noFiles)
 
 @app.route('/download/<filename>')
 def download_and_remove(filename):

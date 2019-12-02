@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="loading hide">
+        <div class="loading-content">
+            <h1>Loading...</h1>
+            <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <h2 class="sub-header">IATI Activity Merge Tool</h2>
+        <p class="lead">Merge multiple IATI activity files</p>
+    </div>
+
+    <div class="panel-group" id="accordionOutput" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo" data-toggle="collapse" data-parent="#accordionOutput"
+                data-target="#collapseOutput" aria-expanded="true" aria-controls="collapseOutput">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span>Download
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOutput" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div><label>The merged file was generated at: {{ timestamp }}</label></div>
+                    <div><label>This is composed of {{ noFiles }} activity files.</label></div>
+                    <div class="w-100">
+                        <a href="download/{{ filename }}"><button class="btn btn-primary pull-left">
+                            Download
+                        </button></a>
+                        <a href="/"><button class="btn btn-primary pull-right">
+                            Load New File
+                        </button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
