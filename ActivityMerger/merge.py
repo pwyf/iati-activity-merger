@@ -14,7 +14,7 @@ def merger(activityFolder, outputFile):
             for file in activityFiles:
                 root = etree.parse(file)
                 activities = root.iterfind(".//iati-activity")
-                totalActivities += len(list(activities))
                 for activity in activities:
+                    totalActivities += 1
                     xf.write(activity)
     return totalActivities
