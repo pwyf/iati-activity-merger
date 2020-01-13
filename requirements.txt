@@ -1,3 +1,4 @@
+-e .
 Click==7.0
 Flask==1.1.1
 Flask-Assets==0.12
