@@ -20,4 +20,4 @@ def test_merge_count(tmpdir):
     test_source = 'tests/fixtures/dfid/'
     output_file = tmpdir.join('temp_merge_test.xml')
     count = merge.merger(test_source, output_file)
-    assert count == 620
+    assert count == 11
