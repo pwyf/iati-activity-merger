@@ -1,21 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block body %}
+<div class="row">
 
-    <title>IATI Activity Merge Tool</title>
-</head>
+    <div class="jumbotron">
+        <h2 class="sub-header">IATI Activity Merge Tool</h2>
+        <p class="lead">Merge multiple IATI activity files</p>
+    </div>
 
-<body>
-    <h1>Upload multiple IATI activity files</h1>
-    <form method=post enctype=multipart/form-data> <input type=file name=files[] multiple>
-        <input type=submit value=Upload>
-    </form>
-</body>
+    <div class="panel-group" id="accordionInput" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordionInput"
+                data-target="#collapseOutput" aria-expanded="true" aria-controls="collapseOutput">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>Upload
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOutput" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <form method=post enctype=multipart/form-data>
+                        <div class="form-group">
+                            <label class="control-label"
+                                for="id_original_file">
+                                Upload multiple Activity Files
+                                (.xml)
+                            </label>
+                            <div class="row bootstrap3-multi-input">
+                                <div class="col-xs-12"><input class="" id="id_original_files" 
+                                    type=file name=files[] multiple onchange="handleFiles(this.files)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                Generate
+                            </button>
+                        </div>
+                        {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            <span class="sr-only">Error:</span>
+                            No activities were detected in the uploaded files. Please verify and try again.
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-group" id="accordionInput" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordionInput"
+                data-target="#collapseOutput" aria-expanded="true" aria-controls="collapseOutput">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle">
+                        <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                        Selected Files
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseFiles" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                <div>
+                    <ul class="list-group no-margin-bottom" id="dynamic-files">
+                    </ul>
+                    <div class="panel-footer">The files that you select will be displayed above.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</html>
+<div class="row" id="how-to-use">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3 class="heading-in-panel">Using the IATI Activity Merge Tool</h3>
+                <p>You can upload multiple IATI Activity files using the file selection tool.</p>
+                <p>Upon clicking generate, your files will be uploaded and merged.</p>
+                <p>Once this process is complete a download button will become visible.</p>
+                <p>Your data is stored for 7 days, after which all files will be deleted.</p>
+                <p>You can validate the generated file by visiting <a href="https://iati.cove.opendataservices.coop/">IATI CoVE</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleFiles(files) {
+        fileList = ""
+        for (file of files) {
+            fileList += '<li class="list-group-item">'+file.name+'</li>'
+        }
+        document.getElementById("dynamic-files").innerHTML = fileList
+    }
+</script>
+{% endblock %}

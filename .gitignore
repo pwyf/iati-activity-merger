@@ -1,3 +1,4 @@
+.ve
 venv
 output
 input
@@ -5,3 +6,6 @@ __pycache__
 testers
 .vscode
 .pytest_cache
+config.py
+*.egg-info
+*.pyc

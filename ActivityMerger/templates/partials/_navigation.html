@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('upload_file') }}">IATI Merge Tool</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li
+        {%- if request.url_rule.endpoint == 'upload_file' %} class="active"{% endif -%}
+                ><a href="{{ url_for('upload_file') }}">Home</a></li>
+        <li class="inactive"><a href="https://dataqualitytester.publishwhatyoufund.org">Data Quality Tester</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="pwyf-logo">
+          <a href="http://www.publishwhatyoufund.org">
+            <img src="{{ url_for('static', filename='img/pwyf.png') }}" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
