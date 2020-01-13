@@ -8,3 +8,4 @@ testers
 .pytest_cache
 config.py
 *.egg-info
+*.pyc
