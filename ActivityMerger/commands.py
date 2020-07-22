@@ -15,16 +15,35 @@ def flush_data(flush_all):
     (or all folders, using the --all switch)
     """
 
-    path = app.config["UPLOAD_FOLDER"]
+    input_path = app.config["UPLOAD_FOLDER"]
+    output_path = app.config["OUTPUT_FOLDER"]
     retention_seconds = 86400 * app.config["RETENTION_DAYS"]
 
-    for folder in os.listdir(path):
-        if flush_all:
-            shutil.rmtree(os.path.join(path, folder))
-        else:
-            if (
-                os.path.getmtime(os.path.join(path, folder))
-                < time.time() - retention_seconds
-            ):
-                shutil.rmtree(os.path.join(path, folder))
+    for folder in os.listdir(input_path):
+        try:
+            if flush_all:
+                shutil.rmtree(os.path.join(input_path, folder))
+            else:
+                if (
+                    os.path.getmtime(os.path.join(input_path, folder))
+                    < time.time() - retention_seconds
+                ):
+                    shutil.rmtree(os.path.join(input_path, folder))
+        except OSError:
+            print(f"Error removing folder: {os.path.join(input_path, folder)}")
+            pass
+
+    for filename in os.listdir(output_path):
+        try:
+            if flush_all:
+                os.remove(os.path.join(output_path, filename))
+            else:
+                if (
+                    os.path.getmtime(os.path.join(output_path, filename))
+                    < time.time() - retention_seconds
+                ):
+                    os.remove(os.path.join(output_path, filename))
+        except OSError:
+            print(f"Error removing file: {os.path.join(output_path, filename)}")
+            pass
 
