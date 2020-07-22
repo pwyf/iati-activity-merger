@@ -28,4 +28,4 @@ assets.register('css_base', Bundle(
     output=os.path.join('gen', 'css.%(version)s.min.css'))
 )
 
-from ActivityMerger import routes
+from ActivityMerger import routes, commands
