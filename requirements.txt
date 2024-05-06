@@ -37,7 +37,7 @@ webassets==2.0
     # via
     #   -r requirements.in
     #   flask-assets
-werkzeug==3.0.1
+werkzeug==3.0.3
     # via
     #   -r requirements.in
     #   flask
